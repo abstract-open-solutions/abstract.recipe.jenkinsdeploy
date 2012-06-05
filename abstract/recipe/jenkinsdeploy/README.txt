@@ -105,3 +105,10 @@ Check if the fab script is created
     >>> 'deploy' in bin_files
     True
 
+Run it:
+    >>> script_output = system('%s/bin/deploy' % sample_buildout).lower()
+    >>> 'connection refused' in script_output
+    True
+
+Yes, connection fail of course. I have to test the script itself, learning about fabric
+testing/mocking
