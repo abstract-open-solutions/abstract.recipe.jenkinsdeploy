@@ -1,5 +1,1 @@
-.. contents::
-
-Introduction
-============
-
+abstract/recipe/jenkinsdeploy/README.txt
