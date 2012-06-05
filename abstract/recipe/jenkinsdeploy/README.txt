@@ -29,13 +29,13 @@ overwrite
     Default to False. Specify if an existing `jobname` job in Jenkins must be replaced.
 
 repository
-    The repositoruy Jenkins will use to fetch the buildout
+    The GIT repository Jenkins will use to fetch the buildout
 
-timing 
-    The timing of the build, in the crontab format. Default: */45 * * * * (every 45 minutes) 
+timing
+    The timing of the build, in the crontab format. Default: */45 * * * * (every 45 minutes)
 
 email
-    Email if the user for Jenkins email notification
+    Email of the user for Jenkins email notification
 
 Example usage
 =============
