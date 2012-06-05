@@ -9,14 +9,9 @@ from setuptools import setup, find_packages
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-version = '1.0'
+version = '0.1'
 
 long_description = (
-    read('README.txt')
-    + '\n' +
-    'Detailed Documentation\n'
-    '**********************\n'
-    + '\n' +
     read('abstract', 'recipe', 'jenkinsdeploy', 'README.txt')
     + '\n' +
     'Contributors\n'
@@ -40,7 +35,7 @@ tests_require = ['zope.testing', 'zc.buildout']
 
 setup(name='abstract.recipe.jenkinsdeploy',
       version=version,
-      description="",
+      description="A Jenkins job deplouy tool",
       long_description=long_description,
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -50,9 +45,9 @@ setup(name='abstract.recipe.jenkinsdeploy',
         'Topic :: Software Development :: Build Tools',
         ],
       keywords='',
-      author='',
-      author_email='',
-      url='http://svn.plone.org/svn/collective/',
+      author='Antonio Sagliocco',
+      author_email='antonio.sagliocco@abstract.it',
+      url='https://github.com/abstract-open-solutions/abstract.recipe.jenkinsdeploy'
       license='gpl',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['abstract', 'abstract.recipe'],
