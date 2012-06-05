@@ -1,41 +1,33 @@
+Introduction
+============
+This recipe simplify the job creation/deploy for Jenkins.
+It creates a script in your ${buildout:bin-directory} you can use to
+automatically deploy a job to your Jenkins instance through SSH.
+
+Is uses Fabric under the hood 
+
 Supported options
 =================
 
 The recipe supports the following options:
 
-.. Note to recipe author!
-   ----------------------
-   For each option the recipe uses you should include a description
-   about the purpose of the option, the format and semantics of the
-   values it accepts, whether it is mandatory or optional and what the
-   default value is if it is omitted.
+jobname
+    The name of the job will be created in Jenkins
 
-option1
-    Description for ``option1``...
+host.{address|port|jobs_path}
+    Address, SSH Port and filesystem jobs folder path of the remote jenkins
 
-option2
-    Description for ``option2``...
+user
+    The user for authenticating in with SSH
+
+overwrite
+    Default to False. Specify if an existing `jobname` job in Jenkins must be replaced.
+
+
 
 
 Example usage
 =============
-
-.. Note to recipe author!
-   ----------------------
-   zc.buildout provides a nice testing environment which makes it
-   relatively easy to write doctests that both demonstrate the use of
-   the recipe and test it.
-   You can find examples of recipe doctests from the PyPI, e.g.
-   
-     http://pypi.python.org/pypi/zc.recipe.egg
-
-   The PyPI page for zc.buildout contains documentation about the test
-   environment.
-
-     http://pypi.python.org/pypi/zc.buildout#testing-support
-
-   Below is a skeleton doctest that you can start with when building
-   your own tests.
 
 We'll start by creating a buildout that uses the recipe::
 
@@ -108,5 +100,8 @@ And run buildout:
     >>> cat(sample_buildout+'/parts/deploy/_config')
     path=/path/to/jobs|host=zope@localhost:8022|overwrite=false|jobname=MyJob
 
-    
+Check if the fab script is created
+    >>> bin_files = system('ls %s/bin' % sample_buildout).lower()
+    >>> 'deploy' in bin_files
+    True
 
