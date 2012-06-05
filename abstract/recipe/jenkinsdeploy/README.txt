@@ -110,5 +110,4 @@ Run it:
     >>> 'connection refused' in script_output
     True
 
-Yes, connection fail of course. I have to test the script itself, learning about fabric
-testing/mocking
+Yes, connection fail of course. I have to test the script itself, learning about fabric testing/mocking
