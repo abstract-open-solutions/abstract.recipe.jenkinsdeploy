@@ -47,7 +47,7 @@ setup(name='abstract.recipe.jenkinsdeploy',
       keywords='',
       author='Antonio Sagliocco',
       author_email='antonio.sagliocco@abstract.it',
-      url='https://github.com/abstract-open-solutions/abstract.recipe.jenkinsdeploy'
+      url='https://github.com/abstract-open-solutions/abstract.recipe.jenkinsdeploy',
       license='gpl',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['abstract', 'abstract.recipe'],
