@@ -5,6 +5,8 @@ It creates a script in your ${buildout:bin-directory} you can use to
 automatically deploy a job to your Jenkins instance through SSH.
 
 Is uses Fabric under the hood.
+It assumes you are using at least this buildout (https://github.com/abstract-open-solutions/Jenkins-Buildout/) 
+to ensure you have installed all the required plugins
 
 NOTE: IT WORKS ONLY FOR GIT HOSTED BUILDOUT
 
@@ -21,15 +23,18 @@ jobdescription
 
 host.{address|port|jobs_path}
     Address, SSH Port and filesystem jobs folder path of the remote jenkins
+    If you are using the above mentioed buildout, the jobs folder is in
+${buildout:directory}/var/jenkins/jobs
 
 user
-    The user for authenticating in with SSH
+    The user used for authenticating in via SSH
 
 overwrite
     Default to False. Specify if an existing `jobname` job in Jenkins must be replaced.
 
 repository
-    The GIT repository Jenkins will use to fetch the buildout
+    The GIT repository Jenkins will use to fetch the buildout (GIT plugin in
+Jenkins is required, of course)
 
 timing
     The timing of the build, in the crontab format. Default: */45 * * * * (every 45 minutes)
