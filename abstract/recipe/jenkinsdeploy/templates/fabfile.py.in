@@ -1,0 +1,38 @@
+from fabric.api import env, task, run, execute, cd, put
+import os
+
+config_file = "$CONFIG_FILE"
+
+with open(config_file) as config:
+    configuration = config.read()
+
+configuration = dict([x.split('=') for x in configuration.split('|')])
+
+env.hosts = (configuration['host'],)
+
+@task
+def createjob():
+    with cd(configuration['path']):
+        current_jobs = run('ls')
+        if configuration['jobname'] not in current_jobs:
+            run('mkdir %s' % (configuration['jobname']))
+    jobdir = os.path.join(configuration['path'], configuration['jobname'])  
+    jobfile = os.path.join(os.path.split(config_file)[0],'config.xml')
+    
+    with cd(jobdir):
+        configfile = run('ls')
+        if 'config.xml' not in configfile:
+            put(jobfile, jobdir) 
+            return
+        else:
+            if configuration['overwrite'].lower() == 'true':
+                put(jobfile, jobdir) 
+                return
+
+def script():
+    execute(createjob)
+
+
+if '__main__' in __name__:
+    script()
+
