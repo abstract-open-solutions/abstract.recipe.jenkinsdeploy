@@ -21,6 +21,10 @@ class Recipe(object):
         options.setdefault('host.user', os.environ['USER'])
         options.setdefault('host.port', '22')
         options.setdefault('overwrite', 'false')
+        options.setdefault('jobdescription','')
+        options.setdefault('repository','')
+        options.setdefault('timing','*/45 * * * *')
+        options.setdefault('email','')
 
     def install(self):
         """Installer"""
@@ -65,10 +69,21 @@ class Recipe(object):
     def write_jobfile(self):
         template = os.path.join(os.path.split(__file__)[0],
                                 'templates/config.xml.in')
+
+
+        variables = {}
+        variables['$DESCRIPTION'] = self.options['jobdescription']
+        variables['$REPOURL'] = self.options['repository']
+        variables['$TIMING'] = self.options['timing']
+        variables['$EMAILNOTIFICATION'] = self.options['email']
+        
         with open(template,'rb') as _f_job_template:
             job_template = _f_job_template.read()
         
+
         with open(self.job_file, 'wb') as _f_job:
+            for var in variables.keys():
+                job_template = job_template.replace(var, variables[var])
             _f_job.write(job_template)
 
 

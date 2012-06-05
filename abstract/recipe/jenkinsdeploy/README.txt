@@ -4,7 +4,9 @@ This recipe simplify the job creation/deploy for Jenkins.
 It creates a script in your ${buildout:bin-directory} you can use to
 automatically deploy a job to your Jenkins instance through SSH.
 
-Is uses Fabric under the hood 
+Is uses Fabric under the hood.
+
+NOTE: IT WORKS ONLY FOR GIT HOSTED BUILDOUT
 
 Supported options
 =================
@@ -13,6 +15,9 @@ The recipe supports the following options:
 
 jobname
     The name of the job will be created in Jenkins
+
+jobdescription
+    The job description
 
 host.{address|port|jobs_path}
     Address, SSH Port and filesystem jobs folder path of the remote jenkins
@@ -23,8 +28,14 @@ user
 overwrite
     Default to False. Specify if an existing `jobname` job in Jenkins must be replaced.
 
+repository
+    The repositoruy Jenkins will use to fetch the buildout
 
+timing 
+    The timing of the build, in the crontab format. Default: */45 * * * * (every 45 minutes) 
 
+email
+    Email if the user for Jenkins email notification
 
 Example usage
 =============
