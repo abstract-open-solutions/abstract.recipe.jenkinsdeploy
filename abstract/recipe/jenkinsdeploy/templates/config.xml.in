@@ -20,9 +20,6 @@
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
-      <hudson.plugins.git.BranchSpec>
-        <name>**</name>
-      </hudson.plugins.git.BranchSpec>
     </branches>
     <disableSubmodules>false</disableSubmodules>
     <recursiveSubmodules>false</recursiveSubmodules>
