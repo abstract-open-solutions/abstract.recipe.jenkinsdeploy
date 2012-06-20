@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project>
+<matrix-project>
   <actions/>
   <description>$DESCRIPTION</description>
   <logRotator>
@@ -53,6 +53,7 @@
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
+  <axes/>
   <builders>
     <hudson.tasks.Shell>
       <command>cd $WORKSPACE
@@ -248,4 +249,7 @@ bin/develop up -v</command>
     </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers/>
-</project>
+  <executionStrategy class="hudson.matrix.DefaultMatrixExecutionStrategyImpl">
+    <runSequentially>false</runSequentially>
+  </executionStrategy>
+</matrix-project>
