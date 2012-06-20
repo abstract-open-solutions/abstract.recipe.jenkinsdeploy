@@ -20,6 +20,9 @@
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>master</name>
+      </hudson.plugins.git.BranchSpec>
     </branches>
     <disableSubmodules>false</disableSubmodules>
     <recursiveSubmodules>false</recursiveSubmodules>
@@ -53,14 +56,34 @@
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
-  <axes/>
+  <axes>
+    <hudson.matrix.TextAxis>
+      <name>BUILDOUT_CONF_FILE</name>
+      <values>
+        <string>development.cfg</string>
+        <string>production.cfg</string>
+      </values>
+    </hudson.matrix.TextAxis>
+    <jenkins.plugins.shiningpanda.matrix.PythonAxis>
+      <name>PYTHON</name>
+      <values>
+        <string>Py2.7</string>
+      </values>
+    </jenkins.plugins.shiningpanda.matrix.PythonAxis>
+  </axes>
   <builders>
-    <hudson.tasks.Shell>
-      <command>cd $WORKSPACE
-python bootstrap.py
-bin/buildout -vvvN
-bin/develop up -v</command>
-    </hudson.tasks.Shell>
+      <hudson.tasks.Shell>
+        <command>cd $WORKSPACE
+echo &quot;[buildout]\nextends=conf/$BUILDOUT_CONF_FILE&quot; &gt; jenkins.cfg</command>
+        </hudson.tasks.Shell>
+    <jenkins.plugins.shiningpanda.builders.BuildoutBuilder>
+      <buildoutCfg>jenkins.cfg</buildoutCfg>
+      <useDistribute>true</useDistribute>
+      <nature>shell</nature>
+      <command>bin/develop up -v
+</command>
+      <ignoreExitCode>false</ignoreExitCode>
+    </jenkins.plugins.shiningpanda.builders.BuildoutBuilder>
   </builders>
   <publishers>
     <hudson.plugins.violations.ViolationsPublisher>
@@ -250,6 +273,6 @@ bin/develop up -v</command>
   </publishers>
   <buildWrappers/>
   <executionStrategy class="hudson.matrix.DefaultMatrixExecutionStrategyImpl">
-    <runSequentially>false</runSequentially>
+    <runSequentially>true</runSequentially>
   </executionStrategy>
 </matrix-project>
