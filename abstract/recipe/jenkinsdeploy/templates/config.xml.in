@@ -60,7 +60,7 @@
     <hudson.matrix.TextAxis>
       <name>BUILDOUT_CONF_FILE</name>
       <values>
-        <string>development.cfg</string>
+        <string>staging.cfg</string>
         <string>production.cfg</string>
       </values>
     </hudson.matrix.TextAxis>
